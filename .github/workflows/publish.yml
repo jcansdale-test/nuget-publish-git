@@ -30,7 +30,7 @@ jobs:
         run: echo 'public class NuGetPublish { public static void SayHello() { System.Console.WriteLine("Hello from ${{ github.repository }}!"); } }' > NuGetPublish.cs
 
       - name: Build package
-        run: dotnet pack -p:RepositoryUrl=${{ github.server_url }}/${{ github.repository }} -p:PackageVersion=${{ env.VERSION }} --output .
+        run: dotnet pack -p:RepositoryUrl=${{ github.server_url }}/${{ github.repository }}.git -p:PackageVersion=${{ env.VERSION }} --output .
 
       - name: Publish package
         run: dotnet nuget push *.nupkg --api-key ${{ secrets.GITHUB_TOKEN }} --source ${{ env.PACKAGES_URL }}/${{ github.repository_owner }}/index.json
